@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {Component} from 'react';
 import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -14,6 +14,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  Button,
   useColorScheme,
   View,
 } from 'react-native';
@@ -25,6 +26,11 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import {Cafe, Box} from '../components';
+// import "app.css";
+
+let isBox = true;
 
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -52,6 +58,10 @@ const Section = ({children, title}): Node => {
   );
 };
 
+const onIncrement = () => {
+  isBox = !isBox;
+};
+
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -70,20 +80,29 @@ const App: () => Node = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits
-          </Section>
+          <View style={styles.container}>
+            <Cafe></Cafe>
+            <Box title="component Box"></Box>
+          </View>
           <Section title="See Your Changes">
             <ReloadInstructions />
           </Section>
-          <Section title="Debug2">
+          <Section title="Debug">
             <DebugInstructions />
           </Section>
-          <Section title="Learn More...">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+        </View>
+        <View
+          style={{
+            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+          }}>
+          <View style={[styles.btn, styles.container]}>
+            <Button
+              title="Increase enthusiasm"
+              accessibilityLabel="increment"
+              onPress={onIncrement}
+              color="cornsilk"
+            />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -96,7 +115,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   sectionTitle: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: '600',
   },
   sectionDescription: {
@@ -107,10 +126,19 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
-    color: '#0000ff',
+    color: '#ff0000',
+    marginTop: 16,
+    marginLeft: 16,
+  },
+  container: {
+    marginHorizontal: 25,
+    marginVertical: 25,
+  },
+  btn: {
+    paddingVertical: 10,
+    borderRadius: 15,
+    backgroundColor: 'crimson',
   },
 });
 
 export default App;
-
-// npx react-native run-android
