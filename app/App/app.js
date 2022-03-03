@@ -6,24 +6,18 @@
  * @flow strict-local
  */
 
-import React, {Component} from 'react';
+import React from 'react';
 import type {Node} from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
-  Button,
   useColorScheme,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 import {Cafe, Box, AddItem} from '../components';
 // import "app.css";
@@ -38,17 +32,17 @@ const App: () => Node = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AddItem></AddItem>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
+        <AddItem />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
           <View style={styles.container}>
-            <Cafe></Cafe>
-            <Box title="component Box"></Box>
+            <Cafe />
+            <Box title="component Box" />
           </View>
         </View>
       </ScrollView>
