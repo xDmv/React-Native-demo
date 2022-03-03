@@ -1,12 +1,17 @@
 import React from 'react';
 import type {Node} from 'react';
 import {useColorScheme, View, TextInput, Button} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const AddItem = ({title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View style={{padding: 25}}>
+    <View
+      style={{
+        backgroundColor: isDarkMode ? Colors.black : Colors.white,
+        padding: 25,
+      }}>
       <View
         style={{
           flexDirection: 'row',
