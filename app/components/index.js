@@ -1,5 +1,4 @@
-import Cafe from './component-class';
-import Box from './box';
 import AddItem from './add-item';
+import ListItem from './list-item';
 
-export {Box, Cafe, AddItem};
+export {AddItem, ListItem};
