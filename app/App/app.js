@@ -6,81 +6,83 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import type {Node} from 'react';
+import React, {useState} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
+  SafeAreaView,
+  StatusBar,
   useColorScheme,
   View,
+  Button,
+  FlatList,
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-import {Cafe, Box, AddItem} from '../components';
-// import "app.css";
+import {AddItem, ListItem} from '../components';
 
-const App: () => Node = () => {
+function App() {
+  const [courseGoals, setCourseGoals] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false);
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const addGoalHandler = goalTitle => {
+    setCourseGoals(currentGoals => [
+      ...currentGoals,
+      {id: Math.random().toString(), value: goalTitle},
+    ]);
+    setIsAddMode(false);
+  };
+
+  const removeGoalHandler = goalId => {
+    setCourseGoals(currentGoals => {
+      return currentGoals.filter(goal => goal.id !== goalId);
+    });
+  };
+
+  const cancelGoalAdditionHandler = () => {
+    setIsAddMode(false);
+  };
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <AddItem />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <View style={styles.container}>
-            <Cafe />
-            <Box title="component Box" />
-          </View>
+      <View
+        style={{
+          backgroundColor: isDarkMode ? Colors.black : Colors.white,
+        }}>
+        <View style={styles.container}>
+          <Button title="Add New Goal" onPress={() => setIsAddMode(true)} />
+          <AddItem
+            visible={isAddMode}
+            onAddGoal={addGoalHandler}
+            onCancel={cancelGoalAdditionHandler}
+          />
+          <FlatList
+            keyExtractor={(item, index) => item.id}
+            data={courseGoals}
+            renderItem={itemData => (
+              <ListItem
+                id={itemData.item.id}
+                onDelete={removeGoalHandler}
+                title={itemData.item.value}
+              />
+            )}
+          />
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: 'red',
-  },
-  highlight: {
-    fontWeight: '700',
-    color: '#ff0000',
-    marginTop: 16,
-    marginLeft: 16,
-  },
   container: {
     marginHorizontal: 25,
     marginVertical: 25,
-  },
-  btn: {
-    paddingVertical: 10,
-    borderColor: 'red',
-    borderRadius: 15,
-    borderWidth: 2,
-    // backgroundColor: 'crimson',
   },
 });
 
