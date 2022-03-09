@@ -11,11 +11,12 @@ import {
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-import {AddItem, ListItem} from '../components';
+import {AddItem, ListItem, CalendarElement} from '../components';
 
 function App() {
   const [courseGoals, setCourseGoals] = useState([]);
   const [isAddMode, setIsAddMode] = useState(false);
+  const [isShowCalendar, setIsShowCalendar] = useState(false);
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -40,6 +41,13 @@ function App() {
     setIsAddMode(false);
   };
 
+  const showCalendar = () => {
+    console.log('isShowCalendar:', isShowCalendar);
+    const isShow = !isShowCalendar;
+    console.log('isShow:', isShow);
+    setIsShowCalendar(isShow);
+  };
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -47,8 +55,15 @@ function App() {
         style={{
           backgroundColor: isDarkMode ? Colors.black : Colors.white,
         }}>
-        <View style={styles.container}>
+        <View>
           <Button title="Add New " onPress={() => setIsAddMode(true)} />
+          <Button
+            title={isShowCalendar ? 'Unvisible Calendar' : 'Visible Calendar'}
+            onPress={() => showCalendar()}
+          />
+          {/* <Button title="" onPress={() => showCalendar()} /> */}
+          {/* {isShowCalendar ? <CalendarElement /> : ''} */}
+          <CalendarElement />
           <AddItem
             visible={isAddMode}
             onAddGoal={addGoalHandler}

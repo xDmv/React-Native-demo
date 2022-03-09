@@ -51,10 +51,12 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: '60%',
+    width: '70%',
   },
   button: {
     width: '40%',
+    borderColor: 'grey',
+    borderWidth: 1,
   },
 });
 
