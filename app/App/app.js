@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React, {useState} from 'react';
 import {
   StyleSheet,
@@ -56,7 +48,7 @@ function App() {
           backgroundColor: isDarkMode ? Colors.black : Colors.white,
         }}>
         <View style={styles.container}>
-          <Button title="Add New Goal" onPress={() => setIsAddMode(true)} />
+          <Button title="Add New " onPress={() => setIsAddMode(true)} />
           <AddItem
             visible={isAddMode}
             onAddGoal={addGoalHandler}

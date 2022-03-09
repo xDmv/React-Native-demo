@@ -1,11 +1,17 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, Button, StyleSheet, TouchableOpacity} from 'react-native';
 
 const GoalItem = props => {
   return (
-    <TouchableOpacity onPress={props.onDelete.bind(this, props.id)}>
+    <TouchableOpacity>
       <View style={styles.listItem}>
-        <Text>{props.title}</Text>
+        <Text style={styles.textelement}>{props.title}</Text>
+        <Button
+          style={styles.listItem}
+          title="Delete"
+          color="red"
+          onPress={props.onDelete.bind(this, props.id)}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -18,6 +24,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
     borderColor: 'black',
     borderWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignContent: 'center',
+  },
+  textelement: {
+    width: '80%',
+  },
+  btn: {
+    paddingVertical: 10,
+    borderRadius: 15,
   },
 });
 
