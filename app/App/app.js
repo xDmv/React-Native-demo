@@ -11,7 +11,7 @@ import {
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-import {AddItem, ListItem, CalendarElement} from '../components';
+import {AddItem, ListItem} from '../components';
 
 function App() {
   const [courseGoals, setCourseGoals] = useState([]);
@@ -42,9 +42,7 @@ function App() {
   };
 
   const showCalendar = () => {
-    console.log('isShowCalendar:', isShowCalendar);
     const isShow = !isShowCalendar;
-    console.log('isShow:', isShow);
     setIsShowCalendar(isShow);
   };
 
@@ -61,9 +59,6 @@ function App() {
             title={isShowCalendar ? 'Unvisible Calendar' : 'Visible Calendar'}
             onPress={() => showCalendar()}
           />
-          {/* <Button title="" onPress={() => showCalendar()} /> */}
-          {/* {isShowCalendar ? <CalendarElement /> : ''} */}
-          <CalendarElement />
           <AddItem
             visible={isAddMode}
             onAddGoal={addGoalHandler}
