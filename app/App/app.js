@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  SafeAreaView,
   StatusBar,
   useColorScheme,
   View,
@@ -11,7 +10,7 @@ import {
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-import {AddItem, ListItem} from '../components';
+import {AddItem, ListItem, Header} from '../components';
 
 function App() {
   const [courseGoals, setCourseGoals] = useState([]);
@@ -21,6 +20,7 @@ function App() {
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    flex: 1,
   };
 
   const addGoalHandler = goalTitle => {
@@ -42,20 +42,23 @@ function App() {
   };
 
   const showCalendar = () => {
+    console.log('isShowCalendar: ', isShowCalendar);
     const isShow = !isShowCalendar;
     setIsShowCalendar(isShow);
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <View style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <Header title="Guess Number" isDark={isDarkMode} />
       <View
         style={{
           backgroundColor: isDarkMode ? Colors.black : Colors.white,
         }}>
-        <View>
+        <View style={styles.container}>
           <Button title="Add New " onPress={() => setIsAddMode(true)} />
           <Button
+            color="green"
             title={isShowCalendar ? 'Unvisible Calendar' : 'Visible Calendar'}
             onPress={() => showCalendar()}
           />
@@ -77,14 +80,14 @@ function App() {
           />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 25,
-    marginVertical: 25,
+    marginHorizontal: 10,
+    marginVertical: 20,
   },
 });
 
